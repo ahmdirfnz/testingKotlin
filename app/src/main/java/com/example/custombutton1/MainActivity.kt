@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     var count = 0
 
+    var test = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
