@@ -10,31 +10,45 @@
 
     <ImageView
         android:id="@+id/images"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/zikr_image1">
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitCenter">
 
     </ImageView>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
-        android:layout_gravity="center">
+        android:gravity="center">
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:id="@+id/counter_button"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:layout_gravity="center"
-            android:onClick="onTap"
             android:text="Counter"
             android:textSize="30dp">
-
         </Button>
+
+        <Button
+            android:id="@+id/reset_button"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Reset"
+            android:textSize="30dp">
+        </Button>
+
+        <Button
+            android:id="@+id/vibrate_button"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Vibrate"
+            android:textSize="30dp"
+            ></Button>
+
     </LinearLayout>
 
 
