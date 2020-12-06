@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private var count = 0
     private var imageindex = 0
+    private var onOff = true
 
     private val images = arrayOf(R.drawable.zikr_image1, R.drawable.zikr_image2, R.drawable.zikr_image3)
 
@@ -33,6 +34,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         vibrateButton = findViewById(R.id.vibrate_button)
+        vibrateButton.setOnClickListener {
+            vibrate()
+        }
 
         imageView = findViewById(R.id.images)
         imageView.setImageResource(images[0])
@@ -46,37 +50,23 @@ class MainActivity : AppCompatActivity() {
         resetButton.setOnClickListener {
             clickResetButton()
         }
-
-//        val button_vibrate = findViewById(R.id.button) as Button
-//        button_vibrate.setOnClickListener {
-//            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE)) // New vibrate method for API Level 26 or higher
-//            } else {
-//                vibrator.vibrate(500) // Vibrate method for below API Level 26
-//            }
-
-//        val button = findViewById<Button>(R.id.button)
-//        button.setOnClickListener() {
-//            Toast.makeText(this, R.string.message, Toast.LENGTH_LONG).show()
-//        }
     }
 
     private fun clickVibrateButton() {
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        if (Build.VERSION.SDK_INT >= 26) {
+        if (onOff) {
+            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= 26) {
                 vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE)) // New vibrate method for API Level 26 or higher
             } else {
                 vibrator.vibrate(500) // Vibrate method for below API Level 26
             }
+        }
     }
 
     private fun clickCounterButton() {
         count += 1
         updateText()
-        Log.d("z", "Count")
         if (count%33 == 0) {
-            Log.d("z", "Siap")
             imageindex += 1
             if (imageindex > images.size - 1) {
                 imageindex = 0
@@ -92,7 +82,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetCounter() {
         count = 0
+        imageindex = 0
         updateText()
+        imageView.setImageResource(images[count])
     }
 
     private fun clickResetButton() {
@@ -110,34 +102,16 @@ class MainActivity : AppCompatActivity() {
 
         alertDialog.show()
 
+        resetCounter()          // reset all equal to zero
+
     }
 
-//        fun onTap(views: View) {
-//            count++;
-//
-//            val textView = findViewById(R.id.button) as Button
-//
-//            val imageView = findViewById(R.id.images) as ImageView
-//
-//            textView.text = "$count"
-//
-//            if (count <= 33) {
-//
-//                imageView.setImageResource(R.drawable.zikr_image1)
-//
-//            } else if (count > 33 && count <= 66) {
-//
-//                imageView.setImageResource(R.drawable.zikr_image2)
-//
-//            } else if (count > 66 && count <= 99) {
-//
-//                imageView.setImageResource(R.drawable.zikr_image3)
-//
-//            } else {
-//
-//                imageView.setImageResource(R.drawable.zikr_image1)
-//                count = 0
-//
-//            }
-//        }
+    private fun vibrate() {
+        onOff = !onOff
+        if (onOff) {
+            vibrateButton.text = "ON"
+        } else {
+            vibrateButton.text = "OFF"
+        }
+    }
 }
